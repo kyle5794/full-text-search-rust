@@ -3,7 +3,9 @@ Rust version of [Artem Krylysov](https://artem.krylysov.com/blog/2020/07/28/lets
 
 Example:
 Indexing documents from the abstract of English Wikipedia. The latest dump is available here https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-abstract1.xml.gz
-Query for `Small wild cat result`:
+
+Query for `Small wild cat` result:
+
 ```
 Loading documents...
 Loading 614215 documents took: 105.616376785s
