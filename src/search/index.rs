@@ -25,6 +25,17 @@ impl Index {
         }
     }
 
+    pub fn add_token(&mut self, token: String, id: u32) {
+        match self.0.get_mut(&token) {
+            Some(ids) => ids.add(id),
+            None => {
+                let mut s = Bitmap::create();
+                s.add(id);
+                self.0.insert(token, s);
+            }
+        }
+    }
+
     pub fn search(&self, text: &str) -> Option<Vec<u32>> {
         let mut results: Vec<&Bitmap> = vec![];
         for token in tokenizer::analyze(text) {
@@ -80,5 +91,8 @@ mod tests {
             url: "b".to_string(),
         }]);
         assert_vec!(vec![1, 2, 3], index.search("liver").unwrap());
+
+        index.add_token("ahihi".to_string(), 10000);
+        assert_vec!(vec![10000], index.search("ahihi").unwrap());
     }
 }

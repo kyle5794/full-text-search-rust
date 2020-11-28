@@ -23,3 +23,36 @@ Query for: "Small wild cat"
 Query took: 365.324µs
 Found 4723 results
 ```
+- Multi-thread indexing
+    - 4 threads
+    ```
+    Loading documents...
+    Loading 617967 documents took: 101.92519673s
+    Spawning thread to index 154492 docs
+    Spawning thread to index 154491 docs
+    Spawning thread to index 154492 docs
+    Spawning thread to index 154492 docs
+    Indexing 617967 documents took: 18.047185589s
+    Query for: "Small wild cat"
+    Query took: 383.421µs
+    Found 4723 results
+    ```
+    - 10 threads
+    ```
+    Loading documents...
+    Loading 617967 documents: 105.858272009s
+    Spawning thread to index 61797 docs
+    Spawning thread to index 61797 docs
+    Spawning thread to index 61797 docs
+    Spawning thread to index 61796 docs
+    Spawning thread to index 61797 docs
+    Spawning thread to index 61797 docs
+    Spawning thread to index 61796 docs
+    Spawning thread to index 61796 docs
+    Spawning thread to index 61797 docs
+    Spawning thread to index 61797 docs
+    Indexing 617967 documents: 12.031762159s
+    Query for: "Small wild cat"
+    Query took: 820.253µs
+    Found 4723 results
+    ```
