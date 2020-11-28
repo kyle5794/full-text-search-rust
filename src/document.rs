@@ -6,7 +6,7 @@ use std::io::{BufReader, Result};
 #[derive(Debug, Deserialize)]
 pub struct Document {
     #[serde(skip)]
-    pub id: i32,
+    pub id: u32,
     #[serde(rename = "title", default)]
     pub title: String,
     #[serde(rename = "abstract", default)]
@@ -22,13 +22,13 @@ struct Docs {
 }
 
 pub fn load_documents() -> Result<Vec<Document>> {
-    let file = fs::File::open("enwiki-latest-abstract1.xml")?;
+    let file = fs::File::open("/home/kyle/learning/rust/data/wiki/enwiki-latest-abstract1.xml")?;
     let reader = BufReader::new(file);
     let mut d: Docs = from_reader(reader).unwrap();
 
     let l = d.documents.len();
     for idx in 0..l {
-        d.documents[idx].id = idx as i32;
+        d.documents[idx].id = idx as u32;
     }
     Ok(d.documents)
 }

@@ -12,3 +12,4 @@ lazy_static = "1.4.0"
 quick-xml = {version = "0.17", features = ["serialize"]}
 rust-stemmers = "1.2.0"
 serde = {version = "1.0.116", features = ["derive"]}
+croaring = "0.4.5"

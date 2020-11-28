@@ -1,8 +1,9 @@
 use crate::analyzer::tokenizer;
 use crate::document::Document;
-use std::collections::{HashMap, HashSet};
+use croaring::Bitmap;
+use std::collections::HashMap;
 
-pub struct Index(pub HashMap<String, HashSet<i32>>);
+pub struct Index(pub HashMap<String, Bitmap>);
 
 impl Index {
     pub fn new() -> Index {
@@ -13,33 +14,28 @@ impl Index {
         for document in documents {
             for token in tokenizer::analyze(&document.text) {
                 match self.0.get_mut(&token) {
-                    Some(ids) => ids.insert(document.id),
+                    Some(ids) => ids.add(document.id),
                     None => {
-                        let mut s = HashSet::new();
-                        s.insert(document.id);
+                        let mut s = Bitmap::create();
+                        s.add(document.id);
                         self.0.insert(token, s);
-                        true
                     }
                 };
             }
         }
     }
 
-    pub fn search(&self, text: &str) -> Option<Vec<i32>> {
-        let mut result: HashSet<i32> = HashSet::new();
+    pub fn search(&self, text: &str) -> Option<Vec<u32>> {
+        let mut results: Vec<&Bitmap> = vec![];
         for token in tokenizer::analyze(text) {
             if let Some(ids) = self.0.get(&token) {
-                result = result.union(&ids).cloned().collect();
+                results.push(ids);
             }
         }
 
-        match result.is_empty() {
+        match results.is_empty() {
             true => Option::None,
-            false => {
-                let mut v32: Vec<i32> = result.iter().cloned().collect();
-                v32.sort();
-                Option::from(v32)
-            }
+            false => Option::from(Bitmap::fast_or(&results).iter().collect::<Vec<u32>>()),
         }
     }
 }

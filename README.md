@@ -5,12 +5,21 @@ Example:
 Indexing documents from the abstract of English Wikipedia. The latest dump is available here https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-abstract1.xml.gz
 
 Query for `Small wild cat` result:
-
+- Original version: using built-in hashset as index
 ```
 Loading documents...
 Loading 614215 documents took: 105.616376785s
 Indexing documents took: 84.009857986s
-Query for: \"Small wild cat\"
+Query for: "Small wild cat"
 Query took: 11.406094ms
 Found 4742 results
+```
+- Using roaring bitmap as index
+```
+Loading documents...
+Loading 617967 documents took: 107.236777035s
+Indexing documents took: 72.404673792s
+Query for: "Small wild cat"
+Query took: 365.324µs
+Found 4723 results
 ```
