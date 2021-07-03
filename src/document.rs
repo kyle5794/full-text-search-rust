@@ -1,4 +1,4 @@
-use crate::analyzer::tokenizer;
+use crate::tokenizer;
 use quick_xml::de::from_reader;
 use serde::Deserialize;
 use std::fs;
@@ -55,7 +55,6 @@ pub fn load_documents_shard(num_shards: usize) -> Result<Vec<Vec<Document>>> {
 
     Ok(results)
 }
-
 
 pub fn parse_document(doc: Document) -> Vec<(String, u32)> {
     tokenizer::analyze(&doc.text)

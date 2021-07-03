@@ -1,7 +1,7 @@
-use crate::analyzer::tokenizer;
-use crate::document::Document;
 use croaring::Bitmap;
 use std::collections::HashMap;
+use crate::document::Document;
+use crate::tokenizer;
 
 pub struct Index(pub HashMap<String, Bitmap>);
 

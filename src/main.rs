@@ -1,7 +1,7 @@
-use full_text_search::document;
-use full_text_search::search::index::Index;
 use std::sync::mpsc;
 use std::time::Instant;
+use full_text_search::index::Index;
+use full_text_search::document;
 
 fn main() {
     let index = create_index(10);

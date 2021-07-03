@@ -1,6 +1,6 @@
 // use rust_stemmers::{Algorithm, Stemmer};
 // use std::collections::HashSet;
-use crate::analyzer::filters;
+mod filters;
 use std::str;
 
 struct Span {
